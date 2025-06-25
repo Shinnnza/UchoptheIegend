@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            opacity: 0;
+            z-index: 9999;
+            animation: fall 5s linear forwards;
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        .rickroll-btn {
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+        .rickroll-btn:hover {
+            transform: rotateY(10deg) rotateX(10deg);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        .rickroll-btn:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-900 to-purple-900 min-h-screen text-white">
+    <div class="container mx-auto px-4 py-8">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl md:text-6xl font-bold mb-2 text-yellow-300 animate-pulse">Imagine falling for this shit</h1>
+            <p class="text-xl md:text-2xl text-yellow-200">Uchop the legend</p>
+            <div class="flex justify-center mt-4">
+                <div class="w-16 h-1 bg-yellow-400 rounded-full"></div>
+            </div>
+        </header>
+
+        <div class="flex flex-col md:flex-row gap-8 items-center justify-center">
+            <div class="w-full md:w-1/2">
+                <div class="video-container rounded-xl overflow-hidden shadow-2xl">
+                    <iframe id="rickroll-video" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="w-full md:w-1/2 space-y-6">
+                <div class="bg-black bg-opacity-30 p-6 rounded-xl backdrop-blur-sm">
+                    <h2 class="text-2xl font-bold mb-4 text-yellow-300">You've Been Rickrolled!</h2>
+                    <p class="mb-4">-69 Aura</p>
+                    <p class="text-sm text-gray-300"></p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <button id="rickroll-btn" class="rickroll-btn bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center space-x-2">
+                        <i class="fas fa-music"></i>
+                        <span>Play Again</span>
+                    </button>
+                    <button id="confetti-btn" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center space-x-2">
+                        <i class="fas fa-party-horn"></i>
+                        <span>Celebrate!</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <footer class="mt-12 text-center text-gray-400 text-sm">
+            <p>Noah beck what the heck what is wrong with your neck</p>
+            <p class="mt-2">© 2025 Never Gonna Give You Up - All rights reserved to uchop the legend</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Play button functionality
+            const rickrollBtn = document.getElementById('rickroll-btn');
+            const video = document.getElementById('rickroll-video');
+            
+            rickrollBtn.addEventListener('click', function() {
+                // Change the video source to force a reload
+                video.src = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1';
+                
+                // Add animation effect
+                this.classList.add('animate-bounce');
+                setTimeout(() => {
+                    this.classList.remove('animate-bounce');
+                }, 1000);
+            });
+
+            // Confetti button functionality
+            const confettiBtn = document.getElementById('confetti-btn');
+            confettiBtn.addEventListener('click', function() {
+                createConfetti();
+                this.classList.add('animate-pulse');
+                setTimeout(() => {
+                    this.classList.remove('animate-pulse');
+                }, 1000);
+            });
+
+            // Create confetti effect
+            function createConfetti() {
+                const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+                
+                for (let i = 0; i < 100; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.width = Math.random() * 10 + 5 + 'px';
+                    confetti.style.height = Math.random() * 10 + 5 + 'px';
+                    confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+                    confetti.style.animationDelay = Math.random() * 2 + 's';
+                    
+                    document.body.appendChild(confetti);
+                    
+                    // Remove confetti after animation
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 5000);
+                }
+            }
+
+            // Easter egg - console message
+            console.log("%cNever gonna give you up, never gonna let you down...", "color: #ff0000; font-size: 20px; font-weight: bold;");
+            console.log("%Imagine falling for this shit", "color: #ffff00; font-size: 16px;");
+        });
+    </script>
+</body>
+</html>
